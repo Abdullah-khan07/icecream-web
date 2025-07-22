@@ -38,4 +38,21 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
   }).catch(error => {
     alert("Error placing order: " + error);
   });
+  function addToCart(name, price) {
+  cart.push({ name, price, quantity: 1 });
+  updateCartUI();
+  Swal.fire("Added!", `${name} added to cart.`, "success");
+}
+
+function openOrderModal(name, price) {
+  currentIceCream = name;
+  currentPrice = price;
+  quantity = 1;
+  updateOrderModal(); // update price
+  document.getElementById('orderModal').style.display = 'flex';
+}
+
 });
+// To use jsPDF and invoice.js, include the following <script> tags in your HTML file instead:
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+// <script src="invoice.js"></script> <!-- New file to be created -->

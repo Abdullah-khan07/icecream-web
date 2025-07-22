@@ -10,8 +10,12 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    * {
+ * {<button id="downloadInvoiceBtn" class="download-btn" style="display: none;">
+  📄 Download Invoice (PDF)
+</button>
+
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -266,7 +270,7 @@
         Swal.fire("Error", "Order failed!", "error");
       });
     }
-    
   </script>
-</body>
-</html>
+  
+
+ 
