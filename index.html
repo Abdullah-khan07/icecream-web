@@ -23,14 +23,22 @@
       overflow-x: hidden;
     }
 
-    header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      background: url('https://i.imgur.com/MwGvY1z.png') no-repeat center center;
-      background-size: cover;
-      color: white;
-      font-size: 2.5rem;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+   header {
+  text-align: center;
+  padding: 40px 20px 20px;
+  background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd') no-repeat center center;
+  background-size: cover;
+  color: white;
+  font-size: 2.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  border-radius: 0 0 20px 20px;
+}
+    header::after {
+      content: '';
+      display: block;
+      height: 100px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+      border-radius: 0 0 20px 20px;
     }
 
     .container {
@@ -258,6 +266,7 @@
         Swal.fire("Error", "Order failed!", "error");
       });
     }
+    
   </script>
 </body>
 </html>
