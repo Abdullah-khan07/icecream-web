@@ -3,63 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Eaton Karachi Ice Cream</title>
+  <title>KW Ice Cream</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css"/>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-analytics-compat.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
- * {<button id="downloadInvoiceBtn" class="download-btn" style="display: none;">
-  📄 Download Invoice (PDF)
-</button>
-
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Fredoka One', cursive;
-    }
-
     body {
-      background: linear-gradient(145deg, #ffe0c3, #ffb199);
-      overflow-x: hidden;
+      margin: 0;
+      font-family: 'Fredoka One', cursive;
+      background: linear-gradient(135deg, #fffdf8, #ffe4d6);
     }
 
-   header {
-  text-align: center;
-  padding: 40px 20px 20px;
-  background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd') no-repeat center center;
-  background-size: cover;
-  color: white;
-  font-size: 2.5rem;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-  border-radius: 0 0 20px 20px;
-}
-    header::after {
-      content: '';
-      display: block;
-      height: 100px;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
-      border-radius: 0 0 20px 20px;
+    header {
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+      color: white;
+      padding: 80px 20px;
+      font-size: 2.5rem;
+      text-align: center;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
     }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 40px;
+    .category-title {
+      font-size: 1.8rem;
+      color: #ff5722;
+      margin: 30px 0 15px;
+      text-align: center;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 0 20px 40px;
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 220px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      overflow: hidden;
       text-align: center;
       transition: transform 0.3s ease;
-      cursor: pointer;
     }
 
     .card:hover {
@@ -68,209 +58,217 @@
 
     .card img {
       width: 100%;
-      height: 180px;
+      height: 150px;
       object-fit: cover;
-      border-radius: 12px;
     }
 
-    .modal {
+    .card-body {
+      padding: 15px;
+    }
+
+    .card-body h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card-body p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .add-btn {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* 🛒 Cart Button */
+    #openCartBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff5f6d;
+      color: white;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    /* 🛒 Modal */
+    #orderModal {
+      display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
+      background: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
-      z-index: 9999;
-      animation: fadeIn 0.4s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+      z-index: 999;
     }
 
     .modal-content {
       background: #fff;
-      border-radius: 20px;
       padding: 20px;
-      max-width: 400px;
+      border-radius: 12px;
       width: 90%;
-      position: relative;
-      animation: slideUp 0.4s ease forwards;
+      max-width: 400px;
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .modal-content h2 {
-      color: #ff5722;
-      margin-bottom: 10px;
-    }
-
-    .modal-content .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    input, textarea, select {
+    input, textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 10px;
-      border-radius: 10px;
+      margin: 10px 0;
       border: 1px solid #ccc;
+      border-radius: 8px;
       font-size: 16px;
     }
 
     .order-btn {
-      background-color: #ff5722;
+      background: #28a745;
       color: white;
+      padding: 12px;
       border: none;
-      margin-top: 15px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 18px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 8px;
       cursor: pointer;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #333;
-      color: white;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 500px) {
-      header {
-        font-size: 1.8rem;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <header>Eaton Karachi Ice Cream</header>
+  <header>KW ICE CREAM 🍦 Fresh & Healthy</header>
 
-  <div class="container">
-    <div class="card" onclick="openModal('Chocolate Delight', 250, '🍫 Oho! Classic chocolate taste — bold choice!')">
-      <img src="assets/ice cream.webp" alt="Chocolate">
-      <h3>Chocolate Delight</h3>
-      <p>Rs. 250</p>
-    </div>
-    <div class="card" onclick="openModal('Strawberry Swirl', 300, '🍓 Fresh, fruity, and fun! A summer favorite.')">
-      <img src="assets/ice cream.webp2.jpg" alt="Strawberry">
-      <h3>Strawberry Swirl</h3>
-      <p>Rs. 300</p>
-    </div>
-    <div class="card" onclick="openModal('Mango Mania', 280, '🥭 Real mango chunks – king of fruits in every bite.')">
-      <img src="assets/ice cream.webp4.jpg" alt="Mango">
-      <h3>Mango Mania</h3>
-      <p>Rs. 280</p>
+  <!-- Kulfi -->
+  <div class="category-title">Kulfi</div>
+  <div class="card-container">
+    <div class="card">
+      <img src="assets/kulfi.jpg" />
+      <div class="card-body">
+        <h3>Mewa Kulfi</h3>
+        <p>Rs. 60</p>
+        <button class="add-btn" onclick="addToCart('Mewa Kulfi', 60)">Add to Cart</button>
+      </div>
     </div>
   </div>
 
-  <div class="modal" id="iceModal">
+  <!-- Half Liter -->
+  <div class="category-title">Half Liter</div>
+  <div class="card-container">
+    <div class="card">
+      <img src="assets/banner.png" />
+      <div class="card-body">
+        <h3>Vanilla Tub</h3>
+        <p>Rs. 150</p>
+        <button class="add-btn" onclick="addToCart('Vanilla Tub', 150)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 Liter -->
+  <div class="category-title">1 Liter</div>
+  <div class="card-container">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Mix+Fruit" />
+      <div class="card-body">
+        <h3>Mix Fruit</h3>
+        <p>Rs. 280</p>
+        <button class="add-btn" onclick="addToCart('Mix Fruit', 280)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="openCartBtn" onclick="openOrderModal()">🛒 Place Order</button>
+
+  <!-- Modal -->
+  <div id="orderModal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">×</span>
-      <h2 id="modalTotal">Total: Rs. 0</h2>
-      <h3 id="modalTitle"></h3>
-      <p id="modalPriceText"></p>
-      <p id="flavorNote" style="font-size: 14px; font-style: italic;"></p>
-      <select id="custQty" onchange="updateTotal()">
-        <option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-      <input type="text" id="custName" placeholder="Your Name">
-      <input type="tel" id="custPhone" placeholder="Phone Number">
-      <input type="text" id="custAddress" placeholder="Your Address">
-      <textarea rows="3" id="custNote" placeholder="Special Instructions..."></textarea>
-      <button class="order-btn" onclick="submitOrder()">Place Order</button>
+      <h3>Customer Details</h3>
+      <input id="custName" placeholder="Name" />
+      <input id="custPhone" placeholder="Phone" />
+      <input id="custAddress" placeholder="Address" />
+      <textarea id="custNote" placeholder="Note (optional)"></textarea>
+      <button class="order-btn" onclick="placeFinalOrder()">Place Order</button>
     </div>
   </div>
-
-  <footer>
-    Crafted with ❤️ by Eaton Karachi – 2025
-  </footer>
 
   <script>
+    // 🧾 Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyA_XXj6aWydKx-eJlRztEzxo7u0NwuwD2E",
       authDomain: "ice-crem-website.firebaseapp.com",
+      databaseURL: "https://ice-crem-website-default-rtdb.firebaseio.com",
       projectId: "ice-crem-website",
       storageBucket: "ice-crem-website.appspot.com",
       messagingSenderId: "414571498319",
-      appId: "1:414571498319:web:5f53cb873c5275a3da133a",
-      measurementId: "G-B5TDFE5YYT",
-      databaseURL: "https://ice-crem-website-default-rtdb.firebaseio.com"
+      appId: "1:414571498319:web:5f53cb873c5275a3da133a"
     };
     firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
     const db = firebase.database();
 
-    let currentIceCream = '';
-    let currentPrice = 0;
-    let currentNote = '';
+    let cart = [];
 
-    function openModal(name, price, note) {
-      currentIceCream = name;
-      currentPrice = price;
-      currentNote = note;
-      document.getElementById('modalTitle').innerText = name;
-      document.getElementById('modalPriceText').innerText = `Price: Rs. ${price}`;
-      document.getElementById('flavorNote').innerText = note;
-      document.getElementById('custQty').value = 1;
-      updateTotal();
-      document.getElementById('iceModal').style.display = 'flex';
+    function addToCart(name, price) {
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      Swal.fire("Added", `${name} added to cart!`, "success");
     }
 
-    function updateTotal() {
-      const qty = parseInt(document.getElementById('custQty').value);
-      document.getElementById('modalTotal').innerText = `Total: Rs. ${qty * currentPrice}`;
+    function openOrderModal() {
+      if (cart.length === 0) {
+        Swal.fire("Cart Empty", "Please add items before placing order.", "warning");
+        return;
+      }
+      document.getElementById("orderModal").style.display = "flex";
     }
 
-    function closeModal() {
-      document.getElementById('iceModal').style.display = 'none';
-    }
+    function placeFinalOrder() {
+      const name = document.getElementById("custName").value;
+      const phone = document.getElementById("custPhone").value;
+      const address = document.getElementById("custAddress").value;
+      const note = document.getElementById("custNote").value;
 
-    function submitOrder() {
-      const name = document.getElementById('custName').value;
-      const phone = document.getElementById('custPhone').value;
-      const address = document.getElementById('custAddress').value;
-      const note = document.getElementById('custNote').value;
-      const qty = parseInt(document.getElementById('custQty').value);
-      const total = qty * currentPrice;
+      if (!name || !phone || !address) {
+        Swal.fire("Required", "Please fill all fields", "warning");
+        return;
+      }
+
+      let total = 0;
+      let orderList = '';
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        orderList += `🍨 ${item.name} x${item.qty} = Rs.${item.price * item.qty}\n`;
+      });
 
       const order = {
-        iceCream: currentIceCream,
-        quantity: qty,
-        name,
-        phone,
-        address,
-        note,
+        name, phone, address, note,
         total,
+        items: cart,
         time: new Date().toISOString()
       };
 
       db.ref("orders").push(order).then(() => {
+        const msg = `*New KW Ice Cream Order*\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n${orderList}Total: Rs.${total}\nNote: ${note}`;
+        const url = `https://wa.me/923700242090?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+        cart = [];
+        document.getElementById("orderModal").style.display = "none";
         Swal.fire("Success", "Order placed!", "success");
-        closeModal();
-        const whatsappMsg = `*🍦 New Order Received!*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}\n*Ice Cream:* ${currentIceCream}\n*Quantity:* ${qty}\n*Note:* ${note}\n*Total:* Rs. ${total}`;
-        const whatsappURL = `https://wa.me/923700242090?text=${encodeURIComponent(whatsappMsg)}`;
-        window.open(whatsappURL, '_blank');
-      }).catch(() => {
-        Swal.fire("Error", "Order failed!", "error");
       });
     }
   </script>
-  
-
- 
+</body>
+</html>
