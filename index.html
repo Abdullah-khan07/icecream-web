@@ -14,93 +14,156 @@
     body {
       margin: 0;
       font-family: 'Fredoka One', cursive;
-      background: linear-gradient(135deg, #fffdf8, #ffe4d6);
+      background: linear-gradient(135deg, #fffdf8 0%, #ffe4d6 50%, #fff0f5 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
 
     header {
-      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+      background: linear-gradient(120deg, #ff5f6d 60%, #ffc371 100%);
       color: white;
-      padding: 80px 20px;
-      font-size: 2.5rem;
+      padding: 90px 20px 60px 20px;
+      font-size: 3rem;
       text-align: center;
-      text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;
+      text-shadow: 4px 4px 12px rgba(0,0,0,0.25);
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      letter-spacing: 2px;
+      box-shadow: 0 8px 32px rgba(255,95,109,0.10);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Animated Sprinkles */
+    .sprinkle {
+      position: absolute;
+      width: 18px;
+      height: 6px;
+      border-radius: 8px;
+      opacity: 0.7;
+      z-index: 1;
+      animation: sprinkleFloat 6s infinite linear;
+    }
+    .sprinkle1 { background: #ff5f6d; top: 30px; left: 10vw; animation-delay: 0s;}
+    .sprinkle2 { background: #ffc371; top: 60px; left: 80vw; animation-delay: 1.5s;}
+    .sprinkle3 { background: #28a745; top: 120px; left: 50vw; animation-delay: 3s;}
+    .sprinkle4 { background: #43e97b; top: 90px; left: 30vw; animation-delay: 2s;}
+    .sprinkle5 { background: #ffb347; top: 40px; left: 60vw; animation-delay: 4s;}
+    @keyframes sprinkleFloat {
+      0% { transform: translateY(0) rotate(0deg);}
+      50% { transform: translateY(30px) rotate(30deg);}
+      100% { transform: translateY(0) rotate(0deg);}
     }
 
     .category-title {
-      font-size: 1.8rem;
-      color: #ff5722;
-      margin: 30px 0 15px;
+      font-size: 2.1rem;
+      color: #ff5f6d;
+      margin: 40px 0 18px;
       text-align: center;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 2px 8px #ffe4d6;
+      position: relative;
+      z-index: 2;
     }
 
     .card-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 28px;
       justify-content: center;
-      padding: 0 20px 40px;
+      padding: 0 20px 50px;
+      z-index: 2;
+      position: relative;
     }
 
     .card {
-      width: 220px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      width: 240px;
+      background: linear-gradient(120deg, #fff 80%, #ffe4d6 100%);
+      border-radius: 18px;
+      box-shadow: 0 10px 24px rgba(255,95,109,0.08), 0 2px 8px rgba(67,233,123,0.06);
       overflow: hidden;
       text-align: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s, filter 0.3s;
+      border: 2px solid #fff0f5;
+      position: relative;
     }
-
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.09) rotate(-2deg);
+      box-shadow: 0 20px 48px rgba(255,95,109,0.18), 0 6px 18px rgba(67,233,123,0.13);
+      filter: drop-shadow(0 0 12px #ffc37188);
     }
 
     .card img {
       width: 100%;
-      height: 150px;
+      height: 160px;
       object-fit: cover;
+      border-bottom: 2px solid #ffe4d6;
+      background: #fff0f5;
+      transition: filter 0.3s;
+    }
+    .card:hover img {
+      filter: brightness(1.08) saturate(1.2);
     }
 
     .card-body {
-      padding: 15px;
+      padding: 18px 12px 16px 12px;
     }
 
     .card-body h3 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: #ff5f6d;
+      letter-spacing: 1px;
     }
 
     .card-body p {
-      font-size: 1rem;
+      font-size: 1.08rem;
       color: #555;
+      margin-bottom: 8px;
     }
 
     .add-btn {
-      background: #28a745;
+      background: linear-gradient(90deg, #28a745 60%, #43e97b 100%);
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
       cursor: pointer;
       margin-top: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(67,233,123,0.10);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .add-btn:hover {
+      background: linear-gradient(90deg, #43e97b 60%, #28a745 100%);
+      transform: scale(1.08);
     }
 
     /* 🛒 Cart Button */
     #openCartBtn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ff5f6d;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(90deg, #ff5f6d 60%, #ffc371 100%);
       color: white;
-      padding: 15px 20px;
+      padding: 18px 28px;
       border: none;
       border-radius: 50px;
-      font-size: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 18px;
+      box-shadow: 0 6px 18px rgba(255,95,109,0.18);
       cursor: pointer;
       z-index: 999;
+      font-family: inherit;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    #openCartBtn:hover {
+      background: linear-gradient(90deg, #ffc371 60%, #ff5f6d 100%);
+      transform: scale(1.08);
     }
 
     /* 🛒 Modal */
@@ -117,30 +180,55 @@
 
     .modal-content {
       background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
+      padding: 28px 20px 24px 20px;
+      border-radius: 18px;
+      width: 95%;
+      max-width: 420px;
+      box-shadow: 0 8px 32px rgba(255,95,109,0.12);
+      border: 2px solid #ffe4d6;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      color: #ff5f6d;
+      margin-bottom: 18px;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
     }
 
     input, textarea {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid #ffc371;
+      border-radius: 10px;
+      font-size: 17px;
+      font-family: inherit;
+      background: #fffdf8;
+      transition: border 0.2s;
+    }
+    input:focus, textarea:focus {
+      border: 1.5px solid #ff5f6d;
+      outline: none;
     }
 
     .order-btn {
-      background: #28a745;
+      background: linear-gradient(90deg, #28a745 60%, #43e97b 100%);
       color: white;
-      padding: 12px;
+      padding: 14px;
       border: none;
       width: 100%;
-      font-size: 16px;
-      border-radius: 8px;
+      font-size: 18px;
+      border-radius: 10px;
       cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .order-btn:hover {
+      background: linear-gradient(90deg, #43e97b 60%, #28a745 100%);
+      transform: scale(1.04);
     }
 
     /* Free Delivery Banner Animation */
@@ -157,9 +245,194 @@
     #freeDeliveryBanner:hover #freeDeliveryText {
       animation-play-state: paused;
     }
+    #freeDeliveryBanner {
+      box-shadow: 0 4px 18px rgba(40,167,69,0.10);
+      border-bottom: 2px solid #43e97b;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      position: relative;
+      z-index: 1;
+    }
+    footer > div {
+      background: linear-gradient(120deg, #fff0f5 60%, #ffe4d6 100%);
+      backdrop-filter: blur(14px);
+      border-top: 3px solid #ffc371;
+      padding: 56px 20px 36px 20px;
+      text-align: center;
+      border-radius: 44px 44px 0 0;
+      box-shadow: 0 -12px 36px rgba(255,95,109,0.13);
+      font-family: 'Fredoka One', cursive;
+      position: relative;
+      overflow: hidden;
+    }
+    footer h2 {
+      color: #ff5f6d;
+      margin-bottom: 12px;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 10px #ffe4d6;
+    }
+    footer p, footer a {
+      color: #444;
+      font-size: 18px;
+      margin: 8px 0 18px;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    footer .fab, footer .fas {
+      transition: transform 0.2s;
+    }
+    footer .fab:hover, footer .fas:hover {
+      transform: scale(1.2) rotate(-8deg);
+    }
+    footer .fab.fa-whatsapp { color: #25D366;}
+    footer .fab.fa-instagram { color: #E1306C;}
+    footer .fas.fa-envelope { color: #EA4335;}
+    footer p:last-child {
+      font-size: 13px;
+      color: #999;
+      margin-top: 22px;
+    }
+
+    /* 1. Enhanced Animated Product Cards */
+.card {
+  transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s, filter 0.3s;
+}
+.card:hover {
+  transform: scale(1.09) rotate(-2deg);
+  box-shadow: 0 20px 48px rgba(255,95,109,0.18), 0 6px 18px rgba(67,233,123,0.13);
+  filter: drop-shadow(0 0 12px #ffc37188);
+}
+
+/* 2. Confetti Sprinkles */
+.confetti {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  animation: confetti-fall 1s linear forwards;
+}
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(0) scale(1);}
+  80% { opacity: 1;}
+  100% { opacity: 0; transform: translateY(80px) scale(0.7);}
+}
+
+/* 4. Floating WhatsApp Button */
+#whatsapp-float {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  background: #25D366;
+  color: #fff;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  box-shadow: 0 4px 18px rgba(37,211,102,0.18);
+  z-index: 9999;
+  cursor: pointer;
+  transition: transform 0.2s;
+  animation: whatsappPulse 1.5s infinite alternate;
+}
+#whatsapp-float:hover { transform: scale(1.12) rotate(-8deg);}
+@keyframes whatsappPulse {
+  0% { box-shadow: 0 0 0 0 #25D36655;}
+  100% { box-shadow: 0 0 0 16px #25D36611;}
+}
+
+/* 6. Animated Loader */
+#icecream-loader {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s;
+}
+#icecream-loader .cone {
+  width: 60px; height: 90px; position: relative;
+  animation: loaderBounce 1.2s infinite alternate;
+}
+#icecream-loader .cone:before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 0;
+  width: 36px; height: 36px;
+  background: radial-gradient(circle at 60% 40%, #ff5f6d 70%, #ffc371 100%);
+  border-radius: 50%;
+  z-index: 2;
+}
+#icecream-loader .cone:after {
+  content: '';
+  position: absolute;
+  left: 22px; top: 30px;
+  width: 16px; height: 40px;
+  background: linear-gradient(120deg, #ffe4d6 60%, #ffc371 100%);
+  border-radius: 0 0 16px 16px;
+  z-index: 1;
+}
+@keyframes loaderBounce {
+  0% { transform: translateY(0);}
+  100% { transform: translateY(-18px);}
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.7) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes spinEmoji {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+@keyframes bounceEmoji {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-10px);}
+}
+@keyframes wiggleEmoji {
+  0%, 100% { transform: rotate(0deg);}
+  50% { transform: rotate(10deg);}
+}
+@keyframes shakeEmoji {
+  0%, 100% { transform: translateX(0);}
+  50% { transform: translateX(-4px);}
+}
+.tab-btn {
+  background: linear-gradient(90deg,#ff5f6d 60%,#ffc371 100%);
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px #ff5f6d22;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  outline: none;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: linear-gradient(90deg,#28a745 60%,#43e97b 100%);
+  color: #fff;
+  transform: scale(1.08);
+}
   </style>
 </head>
 <body>
+  <!-- Sprinkles for fun animated effect -->
+  <div class="sprinkle sprinkle1"></div>
+  <div class="sprinkle sprinkle2"></div>
+  <div class="sprinkle sprinkle3"></div>
+  <div class="sprinkle sprinkle4"></div>
+  <div class="sprinkle sprinkle5"></div>
 
   <header>KW ICE CREAM 🍦 Fresh & Healthy</header>
 
@@ -168,183 +441,305 @@
     background: linear-gradient(90deg, #28a745 60%, #43e97b 100%);
     color: #fff;
     text-align: center;
-    font-size: 1.2rem;
-    padding: 12px 0;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
+    font-size: 1.25rem;
+    padding: 16px 0 16px 0;
+    margin-bottom: 18px;
+    letter-spacing: 1.5px;
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 32px 32px;
+    box-shadow: 0 6px 24px rgba(40,167,69,0.13);
   ">
-    <i class="fa fa-truck" style="margin-right:8px; animation: truckMove 2s infinite alternate;"></i>
+    <i class="fa fa-truck" style="margin-right:12px; font-size:1.5em; animation: truckMove 2s infinite alternate;"></i>
     <span id="freeDeliveryText" style="display: inline-block; animation: bannerSlide 8s linear infinite;">
-      Order any <b>10 Liter</b> ice cream and get <b>FREE DELIVERY</b> in Karachi!
+      <b style="color:#ffc371; font-size:1.1em; text-shadow:0 2px 8px #28a74555;">FREE DELIVERY</b>
+      <span style="margin:0 8px;">on</span>
+      <b style="color:#fff0f5; font-size:1.1em;">10 Liter</b>
+      <span style="margin:0 8px;">ice cream orders in</span>
+      <b style="color:#ffc371;">Karachi</b>
+      <span style="margin-left:10px;">🎉</span>
+    </span>
+    <span style="position:absolute;right:18px;top:10px;font-size:1.1em;opacity:0.7;">
+      <i class="fa fa-ice-cream"></i>
+      <i class="fa fa-ice-cream" style="color:#ffc371;"></i>
     </span>
   </div>
 
+  <!-- Category Filter Tabs -->
+<div id="categoryTabs" style="display:flex;justify-content:center;gap:18px;margin:36px 0 18px 0;">
+  <button class="tab-btn active" onclick="showCategory('kulfi')">Kulfi</button>
+  <button class="tab-btn" onclick="showCategory('half')">Half Liter</button>
+  <button class="tab-btn" onclick="showCategory('one')">1 Liter</button>
+  <button class="tab-btn" onclick="showCategory('ten')">10 Liter</button>
+</div>
+
   <!-- Kulfi -->
-<div class="category-title">Kulfi</div>
-<div class="card-container">
-  <div class="card">
-    <img src="assets/kulfi.jpg" />
-    <div class="card-body">
-      <h3>Crunch Kulfi</h3>
-      <p>Rs. 60</p>
-      <button class="add-btn" onclick="addToCart('Crunch Kulfi', 60)">Add to Cart</button>
-    </div>
+<div id="category-kulfi">
+  <div class="category-title" style="
+    font-size:2.7rem;
+    color:#ff5f6d;
+    margin:56px 0 28px;
+    text-align:center;
+    letter-spacing:3px;
+    text-shadow:3px 6px 24px #ffe4d6, 0 2px 12px #ffc37199;
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    background: linear-gradient(90deg, #fff0f5 60%, #ffe4d6 100%);
+    border-radius: 30px;
+    box-shadow: 0 4px 24px #ff5f6d22;
+    padding: 18px 0 18px 0;
+    border-bottom: 3px dashed #ffc371;
+    border-top: 3px dashed #ffc371;
+    animation: popIn 1.2s cubic-bezier(.4,2,.6,1);
+  ">
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #ffc37199); animation: spinEmoji 2.5s infinite linear;">🍧</span>
+    <span style="font-weight:bold; letter-spacing:2px;">KULFI</span>
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #ffc37199); animation: spinEmoji 2.5s infinite reverse linear;">🍧</span>
   </div>
-
-  <div class="card">
-    <img src="assets/kulfi.jpg" />
-    <div class="card-body">
-      <h3>Mango Kulfi</h3>
-      <p>Rs. 60</p>
-      <button class="add-btn" onclick="addToCart('Mango Kulfi', 60)">Add to Cart</button>
+  <div class="card-container">
+    <div class="card">
+      <img src="assets/kulfi.jpg" />
+      <div class="card-body">
+        <h3>Crunch Kulfi</h3>
+        <p>Rs. 60</p>
+        <button class="add-btn" onclick="addToCart('Crunch Kulfi', 60)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="assets/kulfi.jpg" />
-    <div class="card-body">
-      <h3>Pista Kulfi</h3>
-      <p>Rs. 60</p>
-      <button class="add-btn" onclick="addToCart('Pista Kulfi', 60)">Add to Cart</button>
+    <div class="card">
+      <img src="assets/kulfi.jpg" />
+      <div class="card-body">
+        <h3>Mango Kulfi</h3>
+        <p>Rs. 60</p>
+        <button class="add-btn" onclick="addToCart('Mango Kulfi', 60)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="assets/kulfi.jpg" />
-    <div class="card-body">
-      <h3>Desi Maza</h3>
-      <p>Rs. 60</p>
-      <button class="add-btn" onclick="addToCart('Desi Maza', 60)">Add to Cart</button>
+    <div class="card">
+      <img src="assets/kulfi.jpg" />
+      <div class="card-body">
+        <h3>Pista Kulfi</h3>
+        <p>Rs. 60</p>
+        <button class="add-btn" onclick="addToCart('Pista Kulfi', 60)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="assets/kulfi.jpg" />
-    <div class="card-body">
-      <h3>Matka Kulfi</h3>
-      <p>Rs. 60</p>
-      <button class="add-btn" onclick="addToCart('Matka Kulfi', 60)">Add to Cart</button>
+    <div class="card">
+      <img src="assets/kulfi.jpg" />
+      <div class="card-body">
+        <h3>Desi Maza</h3>
+        <p>Rs. 60</p>
+        <button class="add-btn" onclick="addToCart('Desi Maza', 60)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="assets/kulfi.jpg" />
+      <div class="card-body">
+        <h3>Matka Kulfi</h3>
+        <p>Rs. 60</p>
+        <button class="add-btn" onclick="addToCart('Matka Kulfi', 60)">Add to Cart</button>
+      </div>
     </div>
   </div>
 </div>
 
 
   <!-- Half Liter -->
-<div class="category-title">Half Liter</div>
-<div class="card-container">
-  <div class="card">
-    <img src="assets/banner.png" />
-    <div class="card-body">
-      <h3>Vanilla</h3>
-      <p>Rs. 220</p>
-      <button class="add-btn" onclick="addToCart('Vanilla (Half Liter)', 220)">Add to Cart</button>
-    </div>
+<div id="category-half" style="display:none;">
+  <div class="category-title" style="
+    font-size:2.7rem;
+    color:#43e97b;
+    margin:56px 0 28px;
+    text-align:center;
+    letter-spacing:3px;
+    text-shadow:3px 6px 24px #ffe4d6, 0 2px 12px #ffc37199;
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    background: linear-gradient(90deg, #eafff0 60%, #fff0f5 100%);
+    border-radius: 30px;
+    box-shadow: 0 4px 24px #43e97b22;
+    padding: 18px 0 18px 0;
+    border-bottom: 3px dashed #43e97b;
+    border-top: 3px dashed #43e97b;
+    animation: popIn 1.2s cubic-bezier(.4,2,.6,1);
+  ">
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #43e97b99); animation: bounceEmoji 1.7s infinite alternate;">🥛</span>
+    <span style="font-weight:bold; letter-spacing:2px;">HALF LITER</span>
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #43e97b99); animation: bounceEmoji 1.7s infinite 0.5s alternate;">🥛</span>
   </div>
-
-  <div class="card">
-    <img src="assets/banner.png" />
-    <div class="card-body">
-      <h3>Choco Chip</h3>
-      <p>Rs. 220</p>
-      <button class="add-btn" onclick="addToCart('Choco Chip (Half Liter)', 220)">Add to Cart</button>
+  <div class="card-container">
+    <div class="card">
+      <img src="assets/banner.png" />
+      <div class="card-body">
+        <h3>Vanilla</h3>
+        <p>Rs. 220</p>
+        <button class="add-btn" onclick="addToCart('Vanilla (Half Liter)', 220)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="assets/banner.png" />
-    <div class="card-body">
-      <h3>Oreo</h3>
-      <p>Rs. 220</p>
-      <button class="add-btn" onclick="addToCart('Oreo (Half Liter)', 220)">Add to Cart</button>
+    <div class="card">
+      <img src="assets/banner.png" />
+      <div class="card-body">
+        <h3>Choco Chip</h3>
+        <p>Rs. 220</p>
+        <button class="add-btn" onclick="addToCart('Choco Chip (Half Liter)', 220)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="assets/banner.png" />
-    <div class="card-body">
-      <h3>Mango</h3>
-      <p>Rs. 220</p>
-      <button class="add-btn" onclick="addToCart('Mango (Half Liter)', 220)">Add to Cart</button>
+    <div class="card">
+      <img src="assets/banner.png" />
+      <div class="card-body">
+        <h3>Oreo</h3>
+        <p>Rs. 220</p>
+        <button class="add-btn" onclick="addToCart('Oreo (Half Liter)', 220)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <!-- Add remaining flavors similarly -->
+    <div class="card">
+      <img src="assets/banner.png" />
+      <div class="card-body">
+        <h3>Mango</h3>
+        <p>Rs. 220</p>
+        <button class="add-btn" onclick="addToCart('Mango (Half Liter)', 220)">Add to Cart</button>
+      </div>
+    </div>
+
+    <!-- Add remaining flavors similarly -->
+  </div>
 </div>
 
 
   <!-- 👇🏻 1 Liter -->
-<div class="category-title">1 Liter</div>
-<div class="card-container">
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Vanilla" />
-    <div class="card-body">
-      <h3>Vanilla</h3>
-      <p>Rs. 350</p>
-      <button class="add-btn" onclick="addToCart('Vanilla (1 Liter)', 350)">Add to Cart</button>
-    </div>
+<div id="category-one" style="display:none;">
+  <div class="category-title" style="
+    font-size:2.7rem;
+    color:#ffc371;
+    margin:56px 0 28px;
+    text-align:center;
+    letter-spacing:3px;
+    text-shadow:3px 6px 24px #ffe4d6, 0 2px 12px #ff5f6d99;
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    background: linear-gradient(90deg, #fffbe4 60%, #fff0f5 100%);
+    border-radius: 30px;
+    box-shadow: 0 4px 24px #ffc37122;
+    padding: 18px 0 18px 0;
+    border-bottom: 3px dashed #ff5f6d;
+    border-top: 3px dashed #ff5f6d;
+    animation: popIn 1.2s cubic-bezier(.4,2,.6,1);
+  ">
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #ff5f6d99); animation: wiggleEmoji 1.8s infinite alternate;">🍦</span>
+    <span style="font-weight:bold; letter-spacing:2px;">1 LITER</span>
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #ff5f6d99); animation: wiggleEmoji 1.8s infinite 0.5s alternate;">🍦</span>
   </div>
+  <div class="card-container">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Vanilla" />
+      <div class="card-body">
+        <h3>Vanilla</h3>
+        <p>Rs. 350</p>
+        <button class="add-btn" onclick="addToCart('Vanilla (1 Liter)', 350)">Add to Cart</button>
+      </div>
+    </div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Mango" />
-    <div class="card-body">
-      <h3>Mango</h3>
-      <p>Rs. 350</p>
-      <button class="add-btn" onclick="addToCart('Mango (1 Liter)', 350)">Add to Cart</button>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Mango" />
+      <div class="card-body">
+        <h3>Mango</h3>
+        <p>Rs. 350</p>
+        <button class="add-btn" onclick="addToCart('Mango (1 Liter)', 350)">Add to Cart</button>
+      </div>
     </div>
-  </div>
-  
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Chocolate" />
-    <div class="card-body">
-      <h3>Chocolate</h3>
-      <p>Rs. 350</p>
-      <button class="add-btn" onclick="addToCart('Chocolate (1 Liter)', 350)">Add to Cart</button>
+    
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Chocolate" />
+      <div class="card-body">
+        <h3>Chocolate</h3>
+        <p>Rs. 350</p>
+        <button class="add-btn" onclick="addToCart('Chocolate (1 Liter)', 350)">Add to Cart</button>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ✅ 10 Liter Category Starts Here -->
-<div class="category-title">10 Liter</div>
-<div class="card-container">
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Vanilla+10L" />
-    <div class="card-body">
-      <h3>Vanilla 10L</h3>
-      <p>Rs. 3000</p>
-      <button class="add-btn" onclick="addToCart('Vanilla (10 Liter)', 3000)">Add to Cart</button>
-    </div>
+<div id="category-ten" style="display:none;">
+  <div class="category-title" style="
+    font-size:2.7rem;
+    color:#28a745;
+    margin:56px 0 28px;
+    text-align:center;
+    letter-spacing:3px;
+    text-shadow:3px 6px 24px #ffe4d6, 0 2px 12px #ffc37199;
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    background: linear-gradient(90deg, #eafff0 60%, #fff0f5 100%);
+    border-radius: 30px;
+    box-shadow: 0 4px 24px #28a74522;
+    padding: 18px 0 18px 0;
+    border-bottom: 3px dashed #28a745;
+    border-top: 3px dashed #28a745;
+    animation: popIn 1.2s cubic-bezier(.4,2,.6,1);
+  ">
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #ffc37199); animation: shakeEmoji 1.5s infinite alternate;">🧊</span>
+    <span style="font-weight:bold; letter-spacing:2px;">10 LITER</span>
+    <span style="font-size:2.4rem; filter:drop-shadow(0 2px 8px #ffc37199); animation: shakeEmoji 1.5s infinite 0.5s alternate;">🧊</span>
   </div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Mango+10L" />
-    <div class="card-body">
-      <h3>Mango 10L</h3>
-      <p>Rs. 3000</p>
-      <button class="add-btn" onclick="addToCart('Mango (10 Liter)', 3000)">Add to Cart</button>
+  <div class="card-container">
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Vanilla+10L" />
+      <div class="card-body">
+        <h3>Vanilla 10L</h3>
+        <p>Rs. 3000</p>
+        <button class="add-btn" onclick="addToCart('Vanilla (10 Liter)', 3000)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Chocolate+10L" />
-    <div class="card-body">
-      <h3>Chocolate 10L</h3>
-      <p>Rs. 3000</p>
-      <button class="add-btn" onclick="addToCart('Chocolate (10 Liter)', 3000)">Add to Cart</button>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Mango+10L" />
+      <div class="card-body">
+        <h3>Mango 10L</h3>
+        <p>Rs. 3000</p>
+        <button class="add-btn" onclick="addToCart('Mango (10 Liter)', 3000)">Add to Cart</button>
+      </div>
     </div>
-  </div>
 
-  <div class="card">
-    <img src="https://via.placeholder.com/200x150?text=Pista+10L" />
-    <div class="card-body">
-      <h3>Pista 10L</h3>
-      <p>Rs. 3000</p>
-      <button class="add-btn" onclick="addToCart('Pista (10 Liter)', 3000)">Add to Cart</button>
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Chocolate+10L" />
+      <div class="card-body">
+        <h3>Chocolate 10L</h3>
+        <p>Rs. 3000</p>
+        <button class="add-btn" onclick="addToCart('Chocolate (10 Liter)', 3000)">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/200x150?text=Pista+10L" />
+      <div class="card-body">
+        <h3>Pista 10L</h3>
+        <p>Rs. 3000</p>
+        <button class="add-btn" onclick="addToCart('Pista (10 Liter)', 3000)">Add to Cart</button>
+      </div>
     </div>
   </div>
 </div>
-
 
   <script>
     // 🛒 Cart Button
@@ -451,30 +846,154 @@
         Swal.fire("Success", "Order placed!", "success");
       });
     }
+
+    function showCategory(cat) {
+  ['kulfi','half','one','ten'].forEach(c => {
+    document.getElementById('category-' + c).style.display = (c === cat) ? '' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach((btn,i) => {
+    btn.classList.toggle('active', ['kulfi','half','one','ten'][i] === cat);
+  });
+}
     
   </script>
-  <footer style="margin-top: 50px; position: relative; z-index: 1;">
-  <div style="
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255,255,255,0.4);
-    padding: 40px 20px;
-    text-align: center;
-    border-radius: 30px 30px 0 0;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-    font-family: 'Fredoka One', cursive;
-  ">
-    <h2 style="color:#ff5f6d; margin-bottom: 10px;">KW Ice Cream 🍨</h2>
-    <p style="color:#444; font-size: 16px; margin: 5px 0;">Fresh • Creamy • Desi Taste</p>
-    <p style="color:#666; font-size: 14px; margin: 10px 0 20px;">Call us at 📞 <a href="tel:+923700242090" style="color: #28a745; text-decoration: none;">+92 370 0242090</a></p>
+  <!-- 6. Loader HTML -->
+<div id="icecream-loader">
+  <div class="cone"></div>
+</div>
 
-    <div style="margin: 15px 0;">
-      <a href="https://wa.me/923700242090" target="_blank" style="margin: 0 10px; color: #25D366; font-size: 24px;"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://www.instagram.com/" target="_blank" style="margin: 0 10px; color: #E1306C; font-size: 24px;"><i class="fab fa-instagram"></i></a>
-      <a href="mailto:order@kwicecream.com" style="margin: 0 10px; color: #EA4335; font-size: 24px;"><i class="fas fa-envelope"></i></a>
+<!-- 4. WhatsApp Floating Button -->
+<a id="whatsapp-float" href="https://wa.me/923700242090" target="_blank" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// 6. Hide loader after page load
+window.addEventListener('load', function() {
+  setTimeout(() => {
+    document.getElementById('icecream-loader').style.opacity = 0;
+    setTimeout(() => document.getElementById('icecream-loader').style.display = 'none', 500);
+  }, 900);
+});
+
+// 2. Confetti/Sprinkles on Add to Cart
+function sprinkleConfetti(x, y) {
+  const colors = ['#ff5f6d', '#ffc371', '#28a745', '#43e97b', '#ffb347'];
+  for(let i=0;i<18;i++) {
+    const el = document.createElement('span');
+    el.className = 'confetti';
+    el.style.left = (x + Math.random()*60-30) + 'px';
+    el.style.top = (y + Math.random()*20-10) + 'px';
+    el.style.background = colors[Math.floor(Math.random()*colors.length)];
+    el.style.width = '10px';
+    el.style.height = '4px';
+    el.style.borderRadius = '4px';
+    el.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1000);
+  }
+}
+
+// 1. Enhance addToCart to trigger confetti
+const origAddToCart = window.addToCart;
+window.addToCart = function(name, price) {
+  origAddToCart(name, price);
+  // Find the button that was clicked
+  let btns = document.querySelectorAll('.add-btn');
+  btns.forEach(btn => {
+    if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(name)) {
+      let rect = btn.getBoundingClientRect();
+      sprinkleConfetti(rect.left + rect.width/2, rect.top + window.scrollY + rect.height/2);
+    }
+  });
+};
+</script>
+
+
+<!-- Sound Effects -->
+<audio id="cartDing" src="assets/glassbreak.mp3" preload="auto"></audio>
+<audio id="orderPop" src="assets/bubblepop.mp3" preload="auto"></audio>
+
+<script>
+// Play sound when item is added to cart
+function playCartDing() {
+  const audio = document.getElementById('cartDing');
+  if (audio) { audio.currentTime = 0; audio.play(); }
+}
+
+// Play sound when order is placed
+function playOrderPop() {
+  const audio = document.getElementById('orderPop');
+  if (audio) { audio.currentTime = 0; audio.play(); }
+}
+
+// Patch addToCart to play sound
+const origAddToCartSound = window.addToCart;
+window.addToCart = function(name, price) {
+  origAddToCartSound(name, price);
+  playCartDing();
+  // Confetti code remains
+  let btns = document.querySelectorAll('.add-btn');
+  btns.forEach(btn => {
+    if(btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(name)) {
+      let rect = btn.getBoundingClientRect();
+      sprinkleConfetti(rect.left + rect.width/2, rect.top + window.scrollY + rect.height/2);
+    }
+  });
+};
+
+// Patch placeFinalOrder to play sound
+const origPlaceFinalOrder = window.placeFinalOrder;
+window.placeFinalOrder = function() {
+  playOrderPop();
+  origPlaceFinalOrder();
+};
+
+// Patch showCategory to play sound on tab click
+const origShowCategory = window.showCategory;
+window.showCategory = function(cat) {
+  playCartDing();
+  origShowCategory(cat);
+};
+</script>
+  <footer>
+  <div style="
+    background: linear-gradient(120deg, #fff0f5 60%, #ffe4d6 100%);
+    backdrop-filter: blur(14px);
+    border-top: 3px solid #ffc371;
+    padding: 56px 20px 36px 20px;
+    text-align: center;
+    border-radius: 44px 44px 0 0;
+    box-shadow: 0 -12px 36px rgba(255,95,109,0.13);
+    font-family: 'Fredoka One', cursive;
+    position: relative;
+    overflow: hidden;
+  ">
+    <!-- Decorative Sprinkles in Footer -->
+    <span style="position:absolute;top:18px;left:8vw;width:22px;height:8px;background:#ff5f6d;border-radius:8px;opacity:0.7;transform:rotate(-18deg);"></span>
+    <span style="position:absolute;top:38px;right:12vw;width:22px;height:8px;background:#ffc371;border-radius:8px;opacity:0.7;transform:rotate(12deg);"></span>
+    <span style="position:absolute;top:60px;left:20vw;width:22px;height:8px;background:#28a745;border-radius:8px;opacity:0.7;transform:rotate(8deg);"></span>
+    <span style="position:absolute;top:30px;right:22vw;width:22px;height:8px;background:#43e97b;border-radius:8px;opacity:0.7;transform:rotate(-10deg);"></span>
+    <span style="position:absolute;top:70px;left:35vw;width:22px;height:8px;background:#ffb347;border-radius:8px;opacity:0.7;transform:rotate(16deg);"></span>
+
+    <h2 style="color:#ff5f6d; margin-bottom: 12px; font-size:2.2rem; letter-spacing:2px; text-shadow:2px 2px 10px #ffe4d6;">KW Ice Cream <span style="font-size:1.5rem;">🍨</span></h2>
+    <p style="color:#444; font-size: 18px; margin: 8px 0 18px; letter-spacing:1px;">Fresh • Creamy • Desi Taste</p>
+    <p style="color:#666; font-size: 15px; margin: 10px 0 24px;">Order Now: <a href="tel:+923700242090" style="color: #28a745; text-decoration: underline; font-weight:bold;">+92 370 0242090</a></p>
+
+    <div style="margin: 18px 0 28px;">
+      <a href="https://wa.me/923700242090" target="_blank" style="margin: 0 16px; color: #25D366; font-size: 32px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.2) rotate(-8deg)'" onmouseout="this.style.transform=''"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/" target="_blank" style="margin: 0 16px; color: #E1306C; font-size: 32px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.2) rotate(-8deg)'" onmouseout="this.style.transform=''"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:order@kwicecream.com" style="margin: 0 16px; color: #EA4335; font-size: 32px; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.2) rotate(-8deg)'" onmouseout="this.style.transform=''"><i class="fas fa-envelope"></i></a>
     </div>
 
-    <p style="font-size: 13px; color: #999;">&copy; 2025 KW Ice Cream. All rights reserved.</p>
+    <div style="margin: 0 auto 18px auto; max-width: 340px;">
+      <span style="display:inline-block; background:linear-gradient(90deg,#ff5f6d,#ffc371);color:#fff;padding:7px 18px;border-radius:20px;font-size:1rem;box-shadow:0 2px 8px rgba(255,95,109,0.10);font-weight:bold;letter-spacing:1px;">
+        <i class="fa fa-truck" style="margin-right:6px;"></i>
+        Free Delivery on 10 Liter Orders in Karachi!
+      </span>
+    </div>
+
+    <p style="font-size: 13px; color: #999; margin-top: 22px;">&copy; 2025 KW Ice Cream. All rights reserved.</p>
   </div>
 </footer>
 
