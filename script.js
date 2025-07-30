@@ -23,7 +23,22 @@ function sendToWhatsApp() {
     alert("Cart is empty!");
     return;
   }
-  const message = encodeURIComponent(`Hi! I want to order:\n\n${cart.join('\n')}`);
+
+  let freeDelivery = false;
+  let orderText = "";
+
+  cart.forEach((item) => {
+    orderText += `🍨 ${item}\n`;
+    if (item.toLowerCase().includes("10 liter")) {
+      freeDelivery = true;
+    }
+  });
+
+  if (freeDelivery) {
+    orderText += `\n🚚 *Free Delivery Applied on 10 Liter Order!*`;
+  }
+
+  const message = encodeURIComponent(`Hi! I want to order:\n\n${orderText}`);
   const phoneNumber = "923703197769"; // Your WhatsApp number
   const url = `https://wa.me/${phoneNumber}?text=${message}`;
   window.open(url, "_blank");

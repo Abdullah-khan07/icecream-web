@@ -8,6 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     body {
@@ -142,66 +143,235 @@
       cursor: pointer;
     }
 
+    /* Free Delivery Banner Animation */
+    @keyframes bannerSlide {
+      0% { transform: translateX(100%);}
+      10% { transform: translateX(0);}
+      90% { transform: translateX(0);}
+      100% { transform: translateX(-100%);}
+    }
+    @keyframes truckMove {
+      0% { transform: translateX(0);}
+      100% { transform: translateX(15px);}
+    }
+    #freeDeliveryBanner:hover #freeDeliveryText {
+      animation-play-state: paused;
+    }
   </style>
 </head>
 <body>
 
   <header>KW ICE CREAM 🍦 Fresh & Healthy</header>
 
+  <!-- ⭐️ Free Delivery Banner for 10 Liter Orders (Animated) -->
+  <div id="freeDeliveryBanner" style="
+    background: linear-gradient(90deg, #28a745 60%, #43e97b 100%);
+    color: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 12px 0;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+  ">
+    <i class="fa fa-truck" style="margin-right:8px; animation: truckMove 2s infinite alternate;"></i>
+    <span id="freeDeliveryText" style="display: inline-block; animation: bannerSlide 8s linear infinite;">
+      Order any <b>10 Liter</b> ice cream and get <b>FREE DELIVERY</b> in Karachi!
+    </span>
+  </div>
+
   <!-- Kulfi -->
-  <div class="category-title">Kulfi</div>
-  <div class="card-container">
-    <div class="card">
-      <img src="assets/kulfi.jpg" />
-      <div class="card-body">
-        <h3>Mewa Kulfi</h3>
-        <p>Rs. 60</p>
-        <button class="add-btn" onclick="addToCart('Mewa Kulfi', 60)">Add to Cart</button>
-      </div>
+<div class="category-title">Kulfi</div>
+<div class="card-container">
+  <div class="card">
+    <img src="assets/kulfi.jpg" />
+    <div class="card-body">
+      <h3>Crunch Kulfi</h3>
+      <p>Rs. 60</p>
+      <button class="add-btn" onclick="addToCart('Crunch Kulfi', 60)">Add to Cart</button>
     </div>
   </div>
+
+  <div class="card">
+    <img src="assets/kulfi.jpg" />
+    <div class="card-body">
+      <h3>Mango Kulfi</h3>
+      <p>Rs. 60</p>
+      <button class="add-btn" onclick="addToCart('Mango Kulfi', 60)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="assets/kulfi.jpg" />
+    <div class="card-body">
+      <h3>Pista Kulfi</h3>
+      <p>Rs. 60</p>
+      <button class="add-btn" onclick="addToCart('Pista Kulfi', 60)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="assets/kulfi.jpg" />
+    <div class="card-body">
+      <h3>Desi Maza</h3>
+      <p>Rs. 60</p>
+      <button class="add-btn" onclick="addToCart('Desi Maza', 60)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="assets/kulfi.jpg" />
+    <div class="card-body">
+      <h3>Matka Kulfi</h3>
+      <p>Rs. 60</p>
+      <button class="add-btn" onclick="addToCart('Matka Kulfi', 60)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
 
   <!-- Half Liter -->
-  <div class="category-title">Half Liter</div>
-  <div class="card-container">
-    <div class="card">
-      <img src="assets/banner.png" />
-      <div class="card-body">
-        <h3>Vanilla Tub</h3>
-        <p>Rs. 150</p>
-        <button class="add-btn" onclick="addToCart('Vanilla Tub', 150)">Add to Cart</button>
-      </div>
+<div class="category-title">Half Liter</div>
+<div class="card-container">
+  <div class="card">
+    <img src="assets/banner.png" />
+    <div class="card-body">
+      <h3>Vanilla</h3>
+      <p>Rs. 220</p>
+      <button class="add-btn" onclick="addToCart('Vanilla (Half Liter)', 220)">Add to Cart</button>
     </div>
   </div>
 
-  <!-- 1 Liter -->
-  <div class="category-title">1 Liter</div>
-  <div class="card-container">
-    <div class="card">
-      <img src="https://via.placeholder.com/200x150?text=Mix+Fruit" />
-      <div class="card-body">
-        <h3>Mix Fruit</h3>
-        <p>Rs. 280</p>
-        <button class="add-btn" onclick="addToCart('Mix Fruit', 280)">Add to Cart</button>
-      </div>
+  <div class="card">
+    <img src="assets/banner.png" />
+    <div class="card-body">
+      <h3>Choco Chip</h3>
+      <p>Rs. 220</p>
+      <button class="add-btn" onclick="addToCart('Choco Chip (Half Liter)', 220)">Add to Cart</button>
     </div>
   </div>
 
-  <button id="openCartBtn" onclick="openOrderModal()">🛒 Place Order</button>
-
-  <!-- Modal -->
-  <div id="orderModal">
-    <div class="modal-content">
-      <h3>Customer Details</h3>
-      <input id="custName" placeholder="Name" />
-      <input id="custPhone" placeholder="Phone" />
-      <input id="custAddress" placeholder="Address" />
-      <textarea id="custNote" placeholder="Note (optional)"></textarea>
-      <button class="order-btn" onclick="placeFinalOrder()">Place Order</button>
+  <div class="card">
+    <img src="assets/banner.png" />
+    <div class="card-body">
+      <h3>Oreo</h3>
+      <p>Rs. 220</p>
+      <button class="add-btn" onclick="addToCart('Oreo (Half Liter)', 220)">Add to Cart</button>
     </div>
   </div>
+
+  <div class="card">
+    <img src="assets/banner.png" />
+    <div class="card-body">
+      <h3>Mango</h3>
+      <p>Rs. 220</p>
+      <button class="add-btn" onclick="addToCart('Mango (Half Liter)', 220)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Add remaining flavors similarly -->
+</div>
+
+
+  <!-- 👇🏻 1 Liter -->
+<div class="category-title">1 Liter</div>
+<div class="card-container">
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Vanilla" />
+    <div class="card-body">
+      <h3>Vanilla</h3>
+      <p>Rs. 350</p>
+      <button class="add-btn" onclick="addToCart('Vanilla (1 Liter)', 350)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Mango" />
+    <div class="card-body">
+      <h3>Mango</h3>
+      <p>Rs. 350</p>
+      <button class="add-btn" onclick="addToCart('Mango (1 Liter)', 350)">Add to Cart</button>
+    </div>
+  </div>
+  
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Chocolate" />
+    <div class="card-body">
+      <h3>Chocolate</h3>
+      <p>Rs. 350</p>
+      <button class="add-btn" onclick="addToCart('Chocolate (1 Liter)', 350)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ 10 Liter Category Starts Here -->
+<div class="category-title">10 Liter</div>
+<div class="card-container">
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Vanilla+10L" />
+    <div class="card-body">
+      <h3>Vanilla 10L</h3>
+      <p>Rs. 3000</p>
+      <button class="add-btn" onclick="addToCart('Vanilla (10 Liter)', 3000)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Mango+10L" />
+    <div class="card-body">
+      <h3>Mango 10L</h3>
+      <p>Rs. 3000</p>
+      <button class="add-btn" onclick="addToCart('Mango (10 Liter)', 3000)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Chocolate+10L" />
+    <div class="card-body">
+      <h3>Chocolate 10L</h3>
+      <p>Rs. 3000</p>
+      <button class="add-btn" onclick="addToCart('Chocolate (10 Liter)', 3000)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://via.placeholder.com/200x150?text=Pista+10L" />
+    <div class="card-body">
+      <h3>Pista 10L</h3>
+      <p>Rs. 3000</p>
+      <button class="add-btn" onclick="addToCart('Pista (10 Liter)', 3000)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
 
   <script>
+    // 🛒 Cart Button
+    const cartBtn = document.createElement("button");
+    cartBtn.id = "openCartBtn";
+    cartBtn.innerText = "🛒 View Cart";
+    cartBtn.onclick = openOrderModal;
+    document.body.appendChild(cartBtn);
+    // 🛒 Order Modal
+    const orderModal = document.createElement("div");
+    orderModal.id = "orderModal";
+    orderModal.innerHTML = `
+      <div class="modal-content">
+        <h2>Place Your Order</h2>
+        <input type="text" id="custName" placeholder="Your Name" required />
+        <input type="text" id="custPhone" placeholder="Your Phone" required />
+        <input type="text" id="custAddress" placeholder="Delivery Address" required />
+        <textarea id="custNote" placeholder="Any special instructions"></textarea>
+        <button class="order-btn" onclick="placeFinalOrder()">Place Order</button>
+      </div>
+    `;
+    document.body.appendChild(orderModal);
+    // 🧊 Firebase Initialization
+    // Make sure to include Firebase SDK in your project
+    // You can use the Firebase console to get your config object
+    // Make sure to include Firebase SDK in your project
+    // Include Firebase SDK in your HTML file
     // 🧾 Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyA_XXj6aWydKx-eJlRztEzxo7u0NwuwD2E",
@@ -248,20 +418,32 @@
 
       let total = 0;
       let orderList = '';
+      let freeDelivery = false;
       cart.forEach(item => {
         total += item.price * item.qty;
         orderList += `🍨 ${item.name} x${item.qty} = Rs.${item.price * item.qty}\n`;
+        if (item.name.toLowerCase().includes("10 liter")) {
+          freeDelivery = true;
+        }
       });
+
+      if (freeDelivery) {
+        orderList += `\n🚚 *Free Delivery Applied on 10 Liter Order!*\n`;
+      }
 
       const order = {
         name, phone, address, note,
         total,
         items: cart,
-        time: new Date().toISOString()
+        time: new Date().toISOString(),
+        freeDelivery
       };
 
       db.ref("orders").push(order).then(() => {
-        const msg = `*New KW Ice Cream Order*\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n${orderList}Total: Rs.${total}\nNote: ${note}`;
+        let msg = `*New KW Ice Cream Order*\n\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\n${orderList}Total: Rs.${total}\nNote: ${note}`;
+        if (freeDelivery) {
+          msg += `\n🚚 *Free Delivery Applied!*`;
+        }
         const url = `https://wa.me/923700242090?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
         cart = [];
@@ -269,6 +451,33 @@
         Swal.fire("Success", "Order placed!", "success");
       });
     }
+    
   </script>
+  <footer style="margin-top: 50px; position: relative; z-index: 1;">
+  <div style="
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.4);
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+    font-family: 'Fredoka One', cursive;
+  ">
+    <h2 style="color:#ff5f6d; margin-bottom: 10px;">KW Ice Cream 🍨</h2>
+    <p style="color:#444; font-size: 16px; margin: 5px 0;">Fresh • Creamy • Desi Taste</p>
+    <p style="color:#666; font-size: 14px; margin: 10px 0 20px;">Call us at 📞 <a href="tel:+923700242090" style="color: #28a745; text-decoration: none;">+92 370 0242090</a></p>
+
+    <div style="margin: 15px 0;">
+      <a href="https://wa.me/923700242090" target="_blank" style="margin: 0 10px; color: #25D366; font-size: 24px;"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/" target="_blank" style="margin: 0 10px; color: #E1306C; font-size: 24px;"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:order@kwicecream.com" style="margin: 0 10px; color: #EA4335; font-size: 24px;"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <p style="font-size: 13px; color: #999;">&copy; 2025 KW Ice Cream. All rights reserved.</p>
+  </div>
+</footer>
+
+
 </body>
 </html>
